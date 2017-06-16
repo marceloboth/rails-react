@@ -1,47 +1,46 @@
-import axios from 'axios';
+import JsonApi from 'devour-client';
 
 export const FETCH_FIELDS = 'FETCH_FIELDS';
-// export const FETCH_POST = 'FETCH_POST';
-// export const CREATE_POST = 'CREATE_POST';
-// export const DELETE_POST = 'DELETE_POST';
+export const FETCH_FIELD  = 'FETCH_FIELD';
+export const CREATE_FIELD = 'CREATE_FIELD';
+export const DELETE_FIELD = 'DELETE_FIELD';
 
 const ROOT_URL = 'http://localhost:3000/api/v1';
-// const API_KEY = '?key=89j9j99j9j99j';
+const jsonApi = new JsonApi({apiUrl: ROOT_URL});
+
+jsonApi.define('field', {
+  name: '',
+  createdAt: '',
+  updatedAt: ''
+});
 
 export function fetchFields() {
-  const request = axios.get(`${ROOT_URL}/fields`);
-
   return {
     type: FETCH_FIELDS,
-    payload: request
+    payload: jsonApi.findAll('field')
   };
 }
 
-/*
-export function createPost(props) {
-  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, props);
+export function createField(props, callback) {
+  const request = jsonApi.create('field', { name: props.name })
+    .then(() => callback());
 
   return {
-    type: CREATE_POST,
+    type: CREATE_FIELD,
     payload: request
   };
 }
 
-export function fetchPost(id) {
-  const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
-
+export function fetchField(id) {
   return {
-    type: FETCH_POST,
-    payload: request
+    type: FETCH_FIELD,
+    payload: jsonApi.find('field', id)
   };
 }
 
-export function deletePost(id) {
-  const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`);
-
+export function deleteField(id, callback) {
   return {
-    type: DELETE_POST,
-    payload: request
+    type: DELETE_FIELD,
+    payload: jsonApi.destroy('field', id).then(() => callback())
   };
 }
-*/

@@ -2,27 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { BrowserRouter, Route } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import reducers from './reducers';
 import promise from 'redux-promise';
 import registerServiceWorker from './registerServiceWorker';
+
+import FieldsNew from './components/FieldsNew';
+import FieldsShow from './components/FieldsShow';
 import FieldsIndex from './components/FieldsIndex';
-import { setEndpointHost, setEndpointPath } from 'redux-json-api';
 
 const createStoreWithMiddleware = applyMiddleware(
-  promise,
-  thunk
+  promise
 )(createStore);
-
-createStoreWithMiddleware.dispatch(setEndpointHost('http://localhost:8080'));
-createStoreWithMiddleware.dispatch(setEndpointPath('/api/v1'))
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <Route path="/" component={FieldsIndex} />
+      <div>
+        <Switch>
+          <Route exact path="/fields/new" component={FieldsNew} />
+          <Route exact path="/fields/:id" component={FieldsShow} />
+          <Route exact path="/" component={FieldsIndex} />
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>
   , document.getElementById('root'));

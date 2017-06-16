@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link} from 'react-router-dom';
@@ -9,12 +10,12 @@ class FieldsIndex extends Component {
   }
 
   renderFields() {
-    return this.props.fields.map((field) => {
+    return _.map(this.props.fields, field => {
       return(
         <li className="list-group-item" key={field.id}>
           <Link to={`fields/${field.id}`}>
             <span className="pull-xs-right">{field.name}</span>
-            <strong>{field.name}</strong>
+            <strong>{field.createdAt}</strong>
           </Link>
         </li>
       );
@@ -37,7 +38,7 @@ class FieldsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { fields: state.fields.all };
+  return { fields: state.fields };
 }
 
 export default connect(mapStateToProps, { fetchFields })(FieldsIndex);
