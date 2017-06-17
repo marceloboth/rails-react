@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { createField } from '../actions/index';
 
 class FieldsNew extends Component {
   onSubmit(values) {
-    this.props.createField(values, () => {
-      this.props.history.push('/');
+    const promise = new Promise((resolve, reject) => {
+      const file = values.image[0];
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        if(!!reader.result) {
+          resolve(reader.result)
+        } else {
+          reject(Error("Failed to convert to base 64"))
+        }
+      }
     });
+
+    promise.then(result => {
+      values.image = result;
+
+      this.props.createField(values, () => {
+        this.props.history.push('/');
+      });
+    }, err => {
+      console.log('Erro', err);
+    })
   }
 
   renderField(field) {
@@ -26,16 +48,36 @@ class FieldsNew extends Component {
     );
   }
 
+  renderDropzoneField(field) {
+    const files = field.input.value;
+
+    return(
+      <div>
+        <Dropzone
+          name={field.name}
+          onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
+          multiple={false}>
+          <div>Arraste uma imagem para cá</div>
+        </Dropzone>
+        {field.meta.touched && field.meta.error &&
+          <span className="error">{field.meta.error}</span>}
+        {files && Array.isArray(files) && (
+          <ul>
+            { files.map((file, i) => <li key={i}>{file.name}</li>) }
+          </ul>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const { handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Nome do campo"
-          name="name"
-          component={this.renderField}
-        />
+        <Field label="Nome do campo" name="name" component={this.renderField} />
+        <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
+
         <button type="submit" className="btn btn-primary">Salvar</button>
         <Link to="/" className="btn btn-danger">Cancelar</Link>
       </form>

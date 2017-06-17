@@ -10,6 +10,7 @@ const jsonApi = new JsonApi({apiUrl: ROOT_URL});
 
 jsonApi.define('field', {
   name: '',
+  image: '',
   createdAt: '',
   updatedAt: ''
 });
@@ -22,7 +23,7 @@ export function fetchFields() {
 }
 
 export function createField(props, callback) {
-  const request = jsonApi.create('field', { name: props.name })
+  const request = jsonApi.create('field', { name: props.name, image: props.image })
     .then(() => callback());
 
   return {
