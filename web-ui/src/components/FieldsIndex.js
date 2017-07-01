@@ -14,7 +14,7 @@ class FieldsIndex extends Component {
     return _.map(this.props.fields, field => {
       return(
         <div className="card card-field" key={field.id}>
-          <img alt="campo" src={`http://localhost:3000/${field.image.url}`} width="250" height="175" className="card-img-top" />
+          <img alt="campo" src={`http://localhost:3000/${field.image.url}`} width="200" height="175" className="card-img-top" />
           <div className="card-block">
             <h4 className="card-title">{field.name}</h4>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
@@ -27,7 +27,7 @@ class FieldsIndex extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <br/>
         <div className="row">
           <div className="input-group">

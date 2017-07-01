@@ -1,7 +1,6 @@
-.container {
-  padding-top: 10px;
+.container-fluid {
+  padding: 10px 2em 0 2em;
 }
 .card-field {
-  width: 20rem;
   margin: 4px 4px 0 0;
 }
