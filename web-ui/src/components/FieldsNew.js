@@ -74,13 +74,17 @@ class FieldsNew extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field label="Nome do campo" name="name" component={this.renderField} />
-        <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
+      <div className="container">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Field label="Nome do campo" name="name" component={this.renderField} />
+          <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
 
-        <button type="submit" className="btn btn-primary">Salvar</button>
-        <Link to="/" className="btn btn-danger">Cancelar</Link>
-      </form>
+
+          <br/>
+          <button type="submit" className="btn btn-primary">Salvar</button>
+          <Link to="/" className="btn btn-danger">Cancelar</Link>
+        </form>
+      </div>
     )
   }
 }
