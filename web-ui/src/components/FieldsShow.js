@@ -23,7 +23,7 @@ class FieldsShow extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="card card-field">
           <img alt="campo" src={`http://localhost:3000/${field.image.url}`} width="400" className="card-img-top" />
           <div className="card-block">
