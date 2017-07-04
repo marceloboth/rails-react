@@ -63,7 +63,7 @@ class FieldsNew extends Component {
           <span className="error">{field.meta.error}</span>}
         {files && Array.isArray(files) && (
           <ul>
-            { files.map((file, i) => <li key={i}>{file.name}</li>) }
+            { files.map((file, i) => <li key={i}><img alt={file.name} src={file.preview} /><p>{file.name}</p></li>) }
           </ul>
         )}
       </div>
@@ -74,7 +74,7 @@ class FieldsNew extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field label="Nome do campo" name="name" component={this.renderField} />
           <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
