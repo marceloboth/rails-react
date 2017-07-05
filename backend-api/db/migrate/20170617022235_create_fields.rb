@@ -3,6 +3,8 @@ class CreateFields < ActiveRecord::Migration[5.1]
     create_table :fields do |t|
       t.string :name
       t.string :image
+      t.text :description
+      t.string :address
 
       t.timestamps
     end

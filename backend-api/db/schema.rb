@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170617023022) do
   create_table "fields", force: :cascade do |t|
     t.string "name"
     t.string "image"
+    t.text "description"
+    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
