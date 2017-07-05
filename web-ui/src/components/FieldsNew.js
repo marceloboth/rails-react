@@ -77,6 +77,8 @@ class FieldsNew extends Component {
       <div className="container-fluid">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field label="Nome do campo" name="name" component={this.renderField} />
+          <Field label="Endereço" name="address" component={this.renderField} />
+          <Field label="Descrição" name="description" component={this.renderField} />
           <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
 
 

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_FIELDS, FETCH_FIELD, DELETE_FIELD } from '../actions/index';
+import { FETCH_FIELDS, FETCH_FIELD, DELETE_FIELD, SEARCH_FIELDS } from '../actions/index';
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default function(state = {}, action) {
   case FETCH_FIELD:
     return { ...state, [action.payload.id]: action.payload };
   case FETCH_FIELDS:
+    return _.mapKeys(action.payload, 'id');
+  case SEARCH_FIELDS:
     return _.mapKeys(action.payload, 'id');
   default:
     return state;

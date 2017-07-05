@@ -4,6 +4,7 @@ export const FETCH_FIELDS = 'FETCH_FIELDS';
 export const FETCH_FIELD  = 'FETCH_FIELD';
 export const CREATE_FIELD = 'CREATE_FIELD';
 export const DELETE_FIELD = 'DELETE_FIELD';
+export const SEARCH_FIELDS = 'SEARCH_FIELDS';
 
 const ROOT_URL = 'http://localhost:3000/api/v1';
 const jsonApi = new JsonApi({apiUrl: ROOT_URL});
@@ -11,6 +12,8 @@ const jsonApi = new JsonApi({apiUrl: ROOT_URL});
 jsonApi.define('field', {
   name: '',
   image: '',
+  description: '',
+  address: '',
   createdAt: '',
   updatedAt: ''
 });
@@ -23,7 +26,8 @@ export function fetchFields() {
 }
 
 export function createField(props, callback) {
-  const request = jsonApi.create('field', { name: props.name, image: props.image })
+  const { name, image, description, address } = props;
+  const request = jsonApi.create('field', { name, image, description, address })
     .then(() => callback());
 
   return {
@@ -36,6 +40,14 @@ export function fetchField(id) {
   return {
     type: FETCH_FIELD,
     payload: jsonApi.find('field', id)
+  };
+}
+
+export function searchFields(term) {
+  console.log(term);
+  return {
+    type: SEARCH_FIELDS,
+    payload: jsonApi.findAll('field', { filter: { search: term }})
   };
 }
 

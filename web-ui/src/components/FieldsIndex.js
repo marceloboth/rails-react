@@ -2,12 +2,17 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link} from 'react-router-dom';
-import { fetchFields } from '../actions/index';
+import { fetchFields, searchFields } from '../actions/index';
 import './FieldsIndex.css';
 
 class FieldsIndex extends Component {
   componentWillMount() {
     this.props.fetchFields();
+  }
+
+  searchFields(event){
+    console.log(event.target);
+    this.props.searchFields(event.value);
   }
 
   renderFields() {
@@ -17,7 +22,7 @@ class FieldsIndex extends Component {
           <img alt="campo" src={`http://localhost:3000/${field.image.url}`} width="200" height="175" className="card-img-top" />
           <div className="card-block">
             <h4 className="card-title">{field.name}</h4>
-            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+            <p className="card-text">{field.description}</p>
             <Link to={`fields/${field.id}`} className="btn btn-primary">Visualizar</Link>
           </div>
         </div>
@@ -31,9 +36,14 @@ class FieldsIndex extends Component {
         <br/>
         <div className="row">
           <div className="input-group">
-            <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Encontre um campo" />
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.term}
+              onChange={this.onInputChange}
+              placeholder="Encontre um campo" />
             <span className="input-group-btn">
-              <button className="btn btn-secondary" type="button">Buscar</button>
+              <button className="btn btn-secondary">Pesquisar</button>
             </span>
           </div>
         </div>
@@ -54,4 +64,4 @@ function mapStateToProps(state) {
   return { fields: state.fields };
 }
 
-export default connect(mapStateToProps, { fetchFields })(FieldsIndex);
+export default connect(mapStateToProps, { fetchFields, searchFields })(FieldsIndex);

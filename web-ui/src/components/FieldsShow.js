@@ -28,7 +28,7 @@ class FieldsShow extends Component {
           <img alt="campo" src={`http://localhost:3000/${field.image.url}`} width="400" className="card-img-top" />
           <div className="card-block">
             <h4 className="card-title">{field.name}</h4>
-            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p className="card-text">{field.description}</p>
             <Link to="/" className="btn btn-primary">Back</Link>
             <button
               className="btn btn-danger pull-xs-right"
