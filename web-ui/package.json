@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "devour-client": "^1.4.3",
+    "re-bulma": "^0.4.5",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
     "react-dropzone": "^3.13.2",
