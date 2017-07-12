@@ -7,9 +7,15 @@ import reducers from './reducers';
 import promise from 'redux-promise';
 import registerServiceWorker from './registerServiceWorker';
 
-import FieldsNew from './components/FieldsNew';
-import FieldsShow from './components/FieldsShow';
-import FieldsIndex from './components/FieldsIndex';
+import FieldsNew from './containers/FieldsNew';
+import FieldsShow from './containers/FieldsShow';
+import FieldsIndex from './containers/FieldsIndex';
+
+import insertCss from 'insert-css';
+import css from '../node_modules/re-bulma/build/css';
+try {
+  if (typeof document !== 'undefined' || document !== null) insertCss(css, { prepend: true });
+} catch (e) {}
 
 const createStoreWithMiddleware = applyMiddleware(
   promise

@@ -4,6 +4,9 @@ import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { createField } from '../actions/index';
+import {
+  Container, Columns, Column, Panel, PanelBlock, PanelHeading
+} from 're-bulma';
 
 class FieldsNew extends Component {
   onSubmit(values) {
@@ -74,19 +77,30 @@ class FieldsNew extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="container-fluid">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field label="Nome do campo" name="name" component={this.renderField} />
-          <Field label="Endereço" name="address" component={this.renderField} />
-          <Field label="Descrição" name="description" component={this.renderField} />
-          <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
+      <Container>
+        <Columns>
+          <Column>
+            <Panel>
+              <PanelHeading>
+                Adicionando um novo campo
+              </PanelHeading>
+              <PanelBlock>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                  <Field label="Nome do campo" name="name" component={this.renderField} />
+                  <Field label="Endereço" name="address" component={this.renderField} />
+                  <Field label="Descrição" name="description" component={this.renderField} />
+                  <Field label="Foto do campo" name="image" component={this.renderDropzoneField} />
 
 
-          <br/>
-          <button type="submit" className="btn btn-primary">Salvar</button>
-          <Link to="/" className="btn btn-danger">Cancelar</Link>
-        </form>
-      </div>
+                  <br/>
+                  <button type="submit" className="btn btn-primary">Salvar</button>
+                  <Link to="/" className="btn btn-danger">Cancelar</Link>
+                </form>
+              </PanelBlock>
+            </Panel>
+          </Column>
+        </Columns>
+      </Container>
     )
   }
 }

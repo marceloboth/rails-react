@@ -6,7 +6,7 @@ export const CREATE_FIELD = 'CREATE_FIELD';
 export const DELETE_FIELD = 'DELETE_FIELD';
 export const SEARCH_FIELDS = 'SEARCH_FIELDS';
 
-const ROOT_URL = 'http://localhost:3000/api/v1';
+const ROOT_URL = 'http://127.0.0.1:3000/api/v1';
 const jsonApi = new JsonApi({apiUrl: ROOT_URL});
 
 jsonApi.define('field', {
@@ -44,7 +44,6 @@ export function fetchField(id) {
 }
 
 export function searchFields(term) {
-  console.log(term);
   return {
     type: SEARCH_FIELDS,
     payload: jsonApi.findAll('field', { filter: { search: term }})
